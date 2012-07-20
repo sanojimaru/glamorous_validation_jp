@@ -1,0 +1,3 @@
+sqlite:
+  adapter: sqlite3
+  database: spec/glamorous_validation_jp.sqlite3
