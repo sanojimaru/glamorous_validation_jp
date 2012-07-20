@@ -4,6 +4,20 @@ Some useful validators for sexy validation.
 
 == Usage
 
+=== Email validation
+
+Enable email validation:
+
+    class Example < ActiveRecord::Base
+        validates :email, :email => true
+    end
+
+If you want allow blank:
+
+    class Example < ActiveRecord::Base
+        validates :email, :email => true, :allow_blank => true
+    end
+
 == Features
 
 * Rails 3 compatible
