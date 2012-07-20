@@ -21,26 +21,45 @@ invalid_emails = %w(
   abc;@exam
 )
 
-class Test1 < TestModel
+class EmailTestModel < TestModel
   validates :email, email: true
 end
 
+class EmailTestModelAllowBlank < TestModel
+  validates :email, email: true, allow_blank: true
+end
+
+class EmailTestModelNotAllowBlank < TestModel
+  validates :email, email: true, allow_blank: false
+end
+
+
 describe ActiveModel::Validations::EmailValidator do
-  describe :validation do
-    context :valid do
-      valid_emails.each do |email|
-        it "#{email} should be valid" do
-          Test1.new(email: email).should be_valid
-        end
+  context 'valid email addresses' do
+    valid_emails.each do |email|
+      it "#{email} should be valid" do
+        EmailTestModel.new(email: email).should be_valid
+      end
+    end
+  end
+
+  context 'invalid email addresses' do
+    invalid_emails.each do |email|
+      it "#{email} no should be valid" do
+        EmailTestModel.new(email: email).should_not be_valid
       end
     end
 
-    context :invalid do
-      invalid_emails.each do |email|
-        it "#{email} no should be valid" do
-          Test1.new(email: email).should_not be_valid
-        end
-      end
+    context "if allow_blank is default" do
+      it { EmailTestModel.new(email: '').should_not be_valid }
+    end
+
+    context "if not allow blank" do
+      it { EmailTestModelNotAllowBlank.new(email: '').should_not be_valid }
+    end
+
+    context "if allow blank" do
+      it { EmailTestModelAllowBlank.new(email: '').should be_valid }
     end
   end
 end
