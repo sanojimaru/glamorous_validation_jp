@@ -14,8 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "glamorous_validation_jp"
 
-  s.add_dependency(%q<activerecord>, ['>= 3.1'])
-  s.add_development_dependency(%q<sqlite3>, ["~> 1.3.3"])
+  s.add_dependency(%q<activemodel>, ['>= 3.1'])
   s.add_development_dependency(%q<rspec>, ['~> 2.6.0'])
   s.add_development_dependency(%q<rspec-core>, ['~> 2.6.4'])
 
